@@ -7,9 +7,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
-import pl.kopytka.order.domain.CustomerId;
+import pl.kopytka.common.domain.valueobject.CustomerId;
+import pl.kopytka.common.web.dto.MakePaymentRequest;
+import pl.kopytka.common.web.dto.PaymentResultResponse;
 import pl.kopytka.order.domain.Money;
-import pl.kopytka.order.domain.OrderId;
+import pl.kopytka.common.domain.valueobject.OrderId;
 
 @Component
 @RequiredArgsConstructor
@@ -33,7 +35,7 @@ public class PaymentServiceClient {
                     amount.amount()
             );
 
-            ResponseEntity<PaymentResponse> response = restTemplate.postForEntity(url, request, PaymentResponse.class);
+            ResponseEntity<PaymentResultResponse> response = restTemplate.postForEntity(url, request, PaymentResultResponse.class);
 
             // Check for null response body first
             if (response.getBody() == null) {

@@ -6,7 +6,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
-import pl.kopytka.customer.domain.CustomerId;
+import pl.kopytka.common.domain.valueobject.CustomerId;
+import pl.kopytka.common.web.dto.CreateWalletRequest;
 
 import java.math.BigDecimal;
 
@@ -27,7 +28,7 @@ public class PaymentServiceClient {
             log.info("Creating wallet for customer: {}", customerId.id());
 
             CreateWalletRequest request = new CreateWalletRequest(
-                    customerId.id().toString(),
+                    customerId.id(),
                     BigDecimal.ZERO // Initial amount is zero
             );
 

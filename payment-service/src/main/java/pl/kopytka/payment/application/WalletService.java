@@ -3,10 +3,10 @@ package pl.kopytka.payment.application;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.kopytka.common.domain.valueobject.CustomerId;
+import pl.kopytka.common.domain.valueobject.Money;
 import pl.kopytka.payment.application.exception.WalletAlreadyExistsException;
 import pl.kopytka.payment.application.exception.WalletNotFoundException;
-import pl.kopytka.payment.domain.CustomerId;
-import pl.kopytka.payment.domain.Money;
 import pl.kopytka.payment.domain.Wallet;
 import pl.kopytka.payment.domain.WalletId;
 import pl.kopytka.payment.web.dto.CreateWalletRequest;
@@ -21,7 +21,7 @@ public class WalletService {
     @Transactional
     public WalletId createWallet(CreateWalletRequest request) {
         CustomerId customerId = new CustomerId(request.customerId());
-        Money initialAmount = new Money(request.initialAmount());
+        Money initialAmount = request.initialAmount() != null ? new Money(request.initialAmount()) : Money.ZERO;
 
         walletRepository.findByCustomerId(customerId).ifPresent(wallet -> {
             throw new WalletAlreadyExistsException(customerId);

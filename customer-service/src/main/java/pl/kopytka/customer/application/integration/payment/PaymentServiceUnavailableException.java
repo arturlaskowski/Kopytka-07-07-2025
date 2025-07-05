@@ -1,6 +1,7 @@
 package pl.kopytka.customer.application.integration.payment;
 
-import pl.kopytka.customer.domain.CustomerId;
+
+import pl.kopytka.common.domain.valueobject.CustomerId;
 
 public class PaymentServiceUnavailableException extends RuntimeException {
 

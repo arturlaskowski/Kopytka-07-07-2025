@@ -7,7 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
-import pl.kopytka.order.domain.CustomerId;
+import pl.kopytka.common.domain.valueobject.CustomerId;
+import pl.kopytka.common.web.dto.CustomerResponse;
 
 @Component
 @RequiredArgsConstructor
