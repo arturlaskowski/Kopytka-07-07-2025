@@ -21,7 +21,7 @@ public class WalletService {
     @Transactional
     public WalletId createWallet(CreateWalletRequest request) {
         CustomerId customerId = new CustomerId(request.customerId());
-        Money initialAmount = new Money(request.initialAmount());
+        Money initialAmount = request.initialAmount() != null ? new Money(request.initialAmount()) : Money.ZERO;
 
         walletRepository.findByCustomerId(customerId).ifPresent(wallet -> {
             throw new WalletAlreadyExistsException(customerId);

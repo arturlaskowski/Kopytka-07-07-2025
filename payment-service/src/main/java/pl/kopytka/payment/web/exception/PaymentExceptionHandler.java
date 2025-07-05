@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import pl.kopytka.payment.application.exception.PaymentAlreadyExistsException;
 import pl.kopytka.payment.application.exception.PaymentNotFoundException;
+import pl.kopytka.payment.application.exception.WalletAlreadyExistsException;
 import pl.kopytka.payment.application.exception.WalletNotFoundException;
 import pl.kopytka.payment.domain.PaymentDomainException;
 
@@ -76,5 +77,14 @@ public class PaymentExceptionHandler {
                 request.getRequestURI()
         );
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(WalletAlreadyExistsException.class)
+    public ResponseEntity<ErrorResponse> handlePaymentDomainException(WalletAlreadyExistsException ex, HttpServletRequest request) {
+        ErrorResponse errorResponse = new ErrorResponse(
+                ex.getMessage(),
+                request.getRequestURI()
+        );
+        return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
     }
 }
