@@ -48,7 +48,7 @@ public class PaymentReprocessorService {
                 log.info("Attempting to reprocess payment for order: {}", payment.getOrderId().id());
 
                 Wallet wallet = walletRepository.findByCustomerId(payment.getCustomerId())
-                        .orElseThrow(() -> new WalletNotFoundException("Wallet not found for customer: " + payment.getCustomerId().id()));
+                        .orElseThrow(() -> new WalletNotFoundException(payment.getCustomerId()));
 
                 // Reset status indirectly through the domain service
                 payment.initialize();  // Will keep the existing ID but update the timestamp
