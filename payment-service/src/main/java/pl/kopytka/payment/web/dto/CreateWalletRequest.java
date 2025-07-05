@@ -1,10 +1,13 @@
 package pl.kopytka.payment.web.dto;
 
+import jakarta.validation.constraints.NotNull;
+
 import java.math.BigDecimal;
 import java.util.UUID;
 
+
 public record CreateWalletRequest(
-        UUID customerId,
-        BigDecimal initialAmount
+        @NotNull UUID customerId,
+        BigDecimal initialBalance
 ) {
 }

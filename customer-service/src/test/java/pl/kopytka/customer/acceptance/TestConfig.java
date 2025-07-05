@@ -1,4 +1,4 @@
-package pl.kopytka.customer;
+package pl.kopytka.customer.acceptance;
 
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.TestConfiguration;

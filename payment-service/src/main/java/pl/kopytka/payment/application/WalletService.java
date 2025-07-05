@@ -21,7 +21,7 @@ public class WalletService {
     @Transactional
     public WalletId createWallet(CreateWalletRequest request) {
         CustomerId customerId = new CustomerId(request.customerId());
-        Money initialAmount = request.initialAmount() != null ? new Money(request.initialAmount()) : Money.ZERO;
+        Money initialAmount = request.initialBalance() != null ? new Money(request.initialBalance()) : Money.ZERO;
 
         walletRepository.findByCustomerId(customerId).ifPresent(wallet -> {
             throw new WalletAlreadyExistsException(customerId);
@@ -38,7 +38,7 @@ public class WalletService {
     public void addFunds(WalletId walletId, Money amountToAdd) {
 
         Wallet wallet = walletRepository.findById(walletId)
-                .orElseThrow(() -> new WalletNotFoundException("Wallet with ID " + walletId.id() + " not found"));
+                .orElseThrow(() -> new WalletNotFoundException(walletId));
 
         wallet.addCreditAmount(amountToAdd);
     }
@@ -46,7 +46,7 @@ public class WalletService {
     @Transactional(readOnly = true)
     public WalletDto getWallet(WalletId walletId) {
         Wallet wallet = walletRepository.findById(walletId)
-                .orElseThrow(() -> new WalletNotFoundException("Wallet with ID " + walletId.id() + " not found"));
+                .orElseThrow(() -> new WalletNotFoundException(walletId));
 
         return mapToDto(wallet);
     }
@@ -54,7 +54,7 @@ public class WalletService {
     @Transactional(readOnly = true)
     public WalletDto getWalletByCustomerId(CustomerId customerId) {
         Wallet wallet = walletRepository.findByCustomerId(customerId)
-                .orElseThrow(() -> new WalletNotFoundException("Wallet for customer ID " + customerId.id() + " not found"));
+                .orElseThrow(() -> new WalletNotFoundException(customerId));
 
         return mapToDto(wallet);
     }

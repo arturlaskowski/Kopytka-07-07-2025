@@ -5,7 +5,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import pl.kopytka.common.domain.valueobject.CustomerId;
-import pl.kopytka.common.web.dto.CreateWalletRequest;
 
 import java.math.BigDecimal;
 

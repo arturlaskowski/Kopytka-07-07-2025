@@ -1,4 +1,4 @@
-package pl.kopytka.common.web.dto;
+package pl.kopytka.customer.application.integration.payment;
 
 import jakarta.validation.constraints.NotNull;
 
