@@ -6,10 +6,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import pl.kopytka.common.domain.valueobject.CustomerId;
+import pl.kopytka.common.domain.valueobject.Money;
 import pl.kopytka.common.web.dto.MakePaymentRequest;
-import pl.kopytka.common.web.dto.PaymentResultResponse;
-import pl.kopytka.order.domain.Money;
 import pl.kopytka.common.domain.valueobject.OrderId;
+import pl.kopytka.common.web.dto.PaymentResult;
 
 @Component
 @RequiredArgsConstructor
@@ -29,7 +29,7 @@ public class PaymentServiceClient {
                     amount.amount()
             );
 
-            PaymentResultResponse response = paymentServiceFeignClient.processPayment(request);
+            PaymentResult response = paymentServiceFeignClient.processPayment(request);
 
             if (response == null) {
                 log.error("Payment service returned empty response");
