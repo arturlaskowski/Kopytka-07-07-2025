@@ -4,11 +4,29 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-  #  show-sql: true
+    show-sql: true
     open-in-view: false
     properties:
       hibernate:
         "[format_sql]": true
+  datasource:
+    url: jdbc:h2:mem:kopytkadb
+    username: sa
+    password: password
+    driver-class-name: org.h2.Driver
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings:
+        web-allow-others: false
+
+payment-service:
+  reprocess-payments:
+    interval-in-seconds: 300  # Run every 5 minutes
+    reprocess-scheduler:
+      lock-at-most-for: 10m     # Maximum lock duration
+      lock-at-least-for: 4m     # Minimum lock duration
 
 server:
   port: 8582
