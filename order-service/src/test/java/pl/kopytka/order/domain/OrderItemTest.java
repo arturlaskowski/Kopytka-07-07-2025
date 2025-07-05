@@ -1,6 +1,7 @@
 package pl.kopytka.order.domain;
 
 import org.junit.jupiter.api.Test;
+import pl.kopytka.common.domain.valueobject.Money;
 import pl.kopytka.common.domain.valueobject.ProductId;
 import pl.kopytka.common.domain.valueobject.Quantity;
 
