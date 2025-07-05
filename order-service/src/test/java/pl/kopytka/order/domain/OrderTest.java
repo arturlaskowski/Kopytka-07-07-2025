@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import pl.kopytka.common.domain.valueobject.CustomerId;
+import pl.kopytka.common.domain.valueobject.Money;
 import pl.kopytka.common.domain.valueobject.ProductId;
 import pl.kopytka.common.domain.valueobject.Quantity;
 

@@ -7,10 +7,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.ErrorResponse;
+import pl.kopytka.common.web.dto.CreateWalletRequest;
 import pl.kopytka.payment.web.dto.AddFundsRequest;
-import pl.kopytka.payment.web.dto.CreateWalletRequest;
 import pl.kopytka.payment.web.dto.WalletDto;
 
 import java.math.BigDecimal;
@@ -156,7 +154,7 @@ class WalletControllerAcceptanceTest {
         var nonExistentWalletId = UUID.randomUUID();
 
         // when
-      var response = restTemplate.getForEntity(
+        var response = restTemplate.getForEntity(
                 getBaseWalletsUrl() + "/" + nonExistentWalletId,
                 Object.class
         );
