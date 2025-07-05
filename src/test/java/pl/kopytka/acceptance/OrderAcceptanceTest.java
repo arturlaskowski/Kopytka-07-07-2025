@@ -9,12 +9,14 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import pl.kopytka.application.CustomerRepository;
-import pl.kopytka.application.OrderRepository;
-import pl.kopytka.application.dto.CreateOrderAddressDto;
-import pl.kopytka.application.dto.CreateOrderDto;
-import pl.kopytka.application.dto.CreateOrderItemDto;
-import pl.kopytka.domain.*;
+import pl.kopytka.customer.Customer;
+import pl.kopytka.common.CustomerId;
+import pl.kopytka.customer.CustomerRepository;
+import pl.kopytka.order.application.OrderRepository;
+import pl.kopytka.order.application.dto.CreateOrderAddressDto;
+import pl.kopytka.order.application.dto.CreateOrderDto;
+import pl.kopytka.order.application.dto.CreateOrderItemDto;
+import pl.kopytka.order.domain.*;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -57,7 +59,7 @@ class OrderAcceptanceTest {
         var savedOrder = orderRepository.findById(new OrderId(UUID.fromString(orderId))).orElseThrow();
         assertThat(savedOrder)
                 .hasNoNullFieldsOrProperties()
-                .hasFieldOrPropertyWithValue("customer.customerId", new CustomerId(createOrderDto.customerId()))
+                .hasFieldOrPropertyWithValue("customerId", new CustomerId(createOrderDto.customerId()))
                 .hasFieldOrPropertyWithValue("price", new Money(createOrderDto.price()))
                 .hasFieldOrPropertyWithValue("status", OrderStatus.PENDING)
                 .extracting(Order::getAddress)

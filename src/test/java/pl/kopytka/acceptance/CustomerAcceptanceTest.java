@@ -8,10 +8,10 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import pl.kopytka.application.CustomerService;
-import pl.kopytka.application.dto.CreateCustomerDto;
-import pl.kopytka.application.dto.CustomerDto;
-import pl.kopytka.web.exception.ErrorResponse;
+import pl.kopytka.common.ErrorResponse;
+import pl.kopytka.customer.CreateCustomerDto;
+import pl.kopytka.customer.CustomerDto;
+import pl.kopytka.customer.CustomerService;
 
 import java.util.UUID;
 
