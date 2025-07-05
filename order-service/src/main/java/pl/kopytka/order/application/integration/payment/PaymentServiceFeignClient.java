@@ -4,11 +4,11 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import pl.kopytka.common.web.dto.MakePaymentRequest;
-import pl.kopytka.common.web.dto.PaymentResultResponse;
+import pl.kopytka.common.web.dto.PaymentResult;
 
 @FeignClient(name = "payment-service")
 interface PaymentServiceFeignClient {
-    
+
     @PostMapping("/api/payments/process")
-    PaymentResultResponse processPayment(@RequestBody MakePaymentRequest request);
+    PaymentResult processPayment(@RequestBody MakePaymentRequest request);
 }
