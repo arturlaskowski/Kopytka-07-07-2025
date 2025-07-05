@@ -9,3 +9,6 @@ spring:
         "[format_sql]": true
 
 
+services:
+  payment:
+    url: http://localhost:8582

@@ -7,3 +7,9 @@ spring:
     properties:
       hibernate:
         "[format_sql]": true
+
+services:
+  customer:
+    url: http://localhost:8581
+  payment:
+    url: http://localhost:8582
