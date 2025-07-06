@@ -16,7 +16,7 @@ public interface OrderCommandMapper {
 
     List<OrderItem> toOrderItems(List<CreateOrderItemDto> itemDtos);
 
-    OrderAddress toOrderAddress(CreateOrderAddressDto addressDto);
+    OrderAddress toOrderAddress(CreateOrderAddressDto deliveryAddress);
 
     default Money map(BigDecimal value) {
         return value != null ? new Money(value) : null;

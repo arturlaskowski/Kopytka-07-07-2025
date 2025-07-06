@@ -42,7 +42,7 @@ class OrderQueryMapper {
     private static GetOrderAddressDto mapToAddressDto(OrderAddress address) {
         return new GetOrderAddressDto(
                 address.getStreet(),
-                address.getPostalCode(),
+                address.getPostCode(),
                 address.getCity(),
                 address.getHouseNo()
         );

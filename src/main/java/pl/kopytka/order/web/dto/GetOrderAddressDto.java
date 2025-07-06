@@ -2,7 +2,7 @@ package pl.kopytka.order.web.dto;
 
 public record GetOrderAddressDto(
         String street,
-        String postalCode,
+        String postCode,
         String city,
         String houseNo) {
 }

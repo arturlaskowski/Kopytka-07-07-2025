@@ -24,7 +24,7 @@ public class OrderCommandService {
     public OrderId createOrder(CreateOrderCommand createOrderCommand) {
         validateCustomerExists(createOrderCommand.customerId());
         var items = orderCommandMapper.toOrderItems(createOrderCommand.basketItems());
-        var orderAddress = orderCommandMapper.toOrderAddress(createOrderCommand.address());
+        var orderAddress = orderCommandMapper.toOrderAddress(createOrderCommand.deliveryAddress());
 
         var order = new Order(new CustomerId(createOrderCommand.customerId()), new Money(createOrderCommand.price()),
                 items, orderAddress);

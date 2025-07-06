@@ -1,7 +1,6 @@
 package pl.kopytka.order.domain;
 
 import org.junit.jupiter.api.Test;
-import pl.kopytka.order.domain.OrderAddress;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -20,7 +19,7 @@ class OrderAddressTest {
 
         //then
         assertEquals(street, address.getStreet());
-        assertEquals(postalCode, address.getPostalCode());
+        assertEquals(postalCode, address.getPostCode());
         assertEquals(city, address.getCity());
         assertEquals(houseNo, address.getHouseNo());
     }

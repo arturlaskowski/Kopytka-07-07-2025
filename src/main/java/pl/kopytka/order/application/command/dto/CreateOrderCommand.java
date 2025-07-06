@@ -12,6 +12,6 @@ public record CreateOrderCommand(
         @NotNull UUID customerId,
         @NotNull @Min(0) BigDecimal price,
         @Valid @NotNull List<CreateOrderItemDto> basketItems,
-        @Valid CreateOrderAddressDto address
+        @Valid CreateOrderAddressDto deliveryAddress
 ) {
 }

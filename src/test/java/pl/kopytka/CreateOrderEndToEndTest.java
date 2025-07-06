@@ -69,10 +69,10 @@ class CreateOrderEndToEndTest {
                 .hasFieldOrPropertyWithValue("price", createOrderDto.price())
                 .hasFieldOrPropertyWithValue("status", OrderStatus.PENDING)
                 .extracting(GetOrderByIdQuery::address)
-                .hasFieldOrPropertyWithValue("street", createOrderDto.address().street())
-                .hasFieldOrPropertyWithValue("postalCode", createOrderDto.address().postalCode())
-                .hasFieldOrPropertyWithValue("city", createOrderDto.address().city())
-                .hasFieldOrPropertyWithValue("houseNo", createOrderDto.address().houseNo());
+                .hasFieldOrPropertyWithValue("street", createOrderDto.deliveryAddress().street())
+                .hasFieldOrPropertyWithValue("postCode", createOrderDto.deliveryAddress().postCode())
+                .hasFieldOrPropertyWithValue("city", createOrderDto.deliveryAddress().city())
+                .hasFieldOrPropertyWithValue("houseNo", createOrderDto.deliveryAddress().houseNo());
 
         assertThat(orderResponse.basketItems()).hasSize(createOrderDto.basketItems().size())
                 .zipSatisfy(createOrderDto.basketItems(), (getItem, postItem) -> {
