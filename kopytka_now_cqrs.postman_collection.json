@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "18e99f1d-5b17-45c2-8260-ecde65df17e4",
-		"name": "KopytkaNow - 1",
+		"_postman_id": "6985dff3-ca61-4cc6-ad1c-b010b2b3e939",
+		"name": "KopytkaNow - cqrs",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "5840429"
 	},
@@ -125,6 +125,85 @@
 						"api",
 						"orders",
 						"{{orderId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Order Service - Track Order",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{order_service_url}}/api/orders/{{orderId}}/track",
+					"host": [
+						"{{order_service_url}}"
+					],
+					"path": [
+						"api",
+						"orders",
+						"{{orderId}}",
+						"track"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Order Service - Get Pending Orders",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{order_service_url}}/api/orders/pending",
+					"host": [
+						"{{order_service_url}}"
+					],
+					"path": [
+						"api",
+						"orders",
+						"pending"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Order Service - Pay for Order",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{order_service_url}}/api/orders/{{orderId}}/pay",
+					"host": [
+						"{{order_service_url}}"
+					],
+					"path": [
+						"api",
+						"orders",
+						"{{orderId}}",
+						"pay"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Order Service - Approve Order",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{order_service_url}}/api/orders/{{orderId}}/approve",
+					"host": [
+						"{{order_service_url}}"
+					],
+					"path": [
+						"api",
+						"orders",
+						"{{orderId}}",
+						"approve"
 					]
 				}
 			},

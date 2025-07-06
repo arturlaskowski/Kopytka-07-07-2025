@@ -1,4 +1,4 @@
-package pl.kopytka.order.application.query;
+package pl.kopytka.order.query;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -18,7 +18,7 @@ class OrderQueryMapper {
                 .map(OrderQueryMapper::mapToItemDto)
                 .toList();
 
-        var addressDto = mapToAddressDto(order.getAddress());
+var addressDto = order.getAddress() == null ? null : mapToAddressDto(order.getAddress());
 
         return new GetOrderByIdQuery(
                 order.getId().id(),
@@ -42,7 +42,7 @@ class OrderQueryMapper {
     private static GetOrderAddressDto mapToAddressDto(OrderAddress address) {
         return new GetOrderAddressDto(
                 address.getStreet(),
-                address.getPostalCode(),
+                address.getPostCode(),
                 address.getCity(),
                 address.getHouseNo()
         );

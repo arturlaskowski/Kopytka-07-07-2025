@@ -1,10 +1,10 @@
-package pl.kopytka.order.application.command.dto;
+package pl.kopytka.order.command.create;
 
 import jakarta.validation.constraints.NotBlank;
 
 public record CreateOrderAddressDto(
         @NotBlank String street,
-        @NotBlank String postalCode,
+        @NotBlank String postCode,
         @NotBlank String city,
         @NotBlank String houseNo) {
 }

@@ -1,18 +1,16 @@
-package pl.kopytka.order.application.command;
+package pl.kopytka.order.command.create;
 
 import org.mapstruct.Mapper;
-import pl.kopytka.order.application.command.dto.CreateOrderAddressDto;
-import pl.kopytka.order.application.command.dto.CreateOrderItemDto;
+import pl.kopytka.common.domain.Money;
 import pl.kopytka.order.domain.OrderAddress;
 import pl.kopytka.order.domain.OrderItem;
 import pl.kopytka.order.domain.Quantity;
-import pl.kopytka.common.domain.Money;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 @Mapper(componentModel = "spring")
-public interface OrderCommandMapper {
+interface OrderCreateCommandMapper {
 
     List<OrderItem> toOrderItems(List<CreateOrderItemDto> itemDtos);
 

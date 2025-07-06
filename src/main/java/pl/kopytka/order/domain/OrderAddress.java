@@ -21,7 +21,7 @@ public class OrderAddress {
     private String street;
 
     @NotBlank
-    private String postalCode;
+    private String postCode;
 
     @NotBlank
     private String city;
@@ -29,10 +29,10 @@ public class OrderAddress {
     @NotBlank
     private String houseNo;
 
-    public OrderAddress(String street, String postalCode, String city, String houseNo) {
+    public OrderAddress(String street, String postCode, String city, String houseNo) {
         this.id = UUID.randomUUID();
         this.street = street;
-        this.postalCode = postalCode;
+        this.postCode = postCode;
         this.city = city;
         this.houseNo = houseNo;
     }
