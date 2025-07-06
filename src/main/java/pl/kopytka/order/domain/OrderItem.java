@@ -3,6 +3,7 @@ package pl.kopytka.order.domain;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
+import pl.kopytka.common.domain.Money;
 
 import java.util.UUID;
 

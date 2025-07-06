@@ -9,14 +9,18 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import pl.kopytka.common.domain.CustomerId;
+import pl.kopytka.common.domain.Money;
+import pl.kopytka.common.domain.OrderId;
 import pl.kopytka.customer.Customer;
-import pl.kopytka.common.CustomerId;
 import pl.kopytka.customer.CustomerRepository;
-import pl.kopytka.order.application.OrderRepository;
-import pl.kopytka.order.application.dto.CreateOrderAddressDto;
-import pl.kopytka.order.application.dto.CreateOrderDto;
-import pl.kopytka.order.application.dto.CreateOrderItemDto;
-import pl.kopytka.order.domain.*;
+import pl.kopytka.order.application.command.OrderRepository;
+import pl.kopytka.order.application.command.dto.CreateOrderAddressDto;
+import pl.kopytka.order.application.command.dto.CreateOrderCommand;
+import pl.kopytka.order.application.command.dto.CreateOrderItemDto;
+import pl.kopytka.order.domain.Order;
+import pl.kopytka.order.domain.OrderStatus;
+import pl.kopytka.order.domain.Quantity;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -43,8 +47,8 @@ class OrderAcceptanceTest {
     @DisplayName("""
             given request to add order for existing customer,
             when request is sent,
-            then save order and HTTP 200 status received""")
-    void givenRequestToAddOrderForExistingCustomer_whenRequestIsSent_thenOrderSavedAndHttp200() {
+            then save order and HTTP 201 status received""")
+    void givenRequestToAddOrderForExistingCustomer_whenRequestIsSent_thenOrderSavedAndHttp201() {
         // given
         var createOrderDto = createOrderDto();
 
@@ -53,9 +57,9 @@ class OrderAcceptanceTest {
 
         // then
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
-        assertThat(response.getHeaders().getLocation()).isNotNull();
-        var orderId = response.getHeaders().getLocation().getPath().split("/")[3];
-
+        var location = response.getHeaders().getLocation();
+        assertThat(location).isNotNull();
+        var orderId = location.getPath().split("/")[3];
         var savedOrder = orderRepository.findById(new OrderId(UUID.fromString(orderId))).orElseThrow();
         assertThat(savedOrder)
                 .hasNoNullFieldsOrProperties()
@@ -77,13 +81,13 @@ class OrderAcceptanceTest {
                 });
     }
 
-    private CreateOrderDto createOrderDto() {
+    private CreateOrderCommand createOrderDto() {
         var customerId = customerRepository.save(new Customer("Waldek", "Kiepski", "waldek@gmail.com")).getCustomerId().id();
 
         var items = List.of(new CreateOrderItemDto(UUID.randomUUID(), 2, new BigDecimal("10.00"), new BigDecimal("20.00")),
                 new CreateOrderItemDto(UUID.randomUUID(), 1, new BigDecimal("34.56"), new BigDecimal("34.56")));
         var address = new CreateOrderAddressDto("Małysza", "94-000", "Adasiowo", "12");
-        return new CreateOrderDto(customerId, new BigDecimal("54.56"), items, address);
+        return new CreateOrderCommand(customerId, new BigDecimal("54.56"), items, address);
     }
 
     private String getBaseUrl() {

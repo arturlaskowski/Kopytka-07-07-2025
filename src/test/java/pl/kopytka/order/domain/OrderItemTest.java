@@ -1,10 +1,7 @@
 package pl.kopytka.order.domain;
 
 import org.junit.jupiter.api.Test;
-import pl.kopytka.order.domain.Money;
-import pl.kopytka.order.domain.OrderDomainException;
-import pl.kopytka.order.domain.OrderItem;
-import pl.kopytka.order.domain.Quantity;
+import pl.kopytka.common.domain.Money;
 
 import java.math.BigDecimal;
 import java.util.UUID;

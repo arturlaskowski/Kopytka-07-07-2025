@@ -3,11 +3,11 @@ package pl.kopytka.customer;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import pl.kopytka.common.ErrorResponse;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+import pl.kopytka.common.web.ErrorResponse;
 
-@ControllerAdvice
+@RestControllerAdvice
 public class CustomerRestApiExceptionHandler {
 
     @ExceptionHandler(value = CustomerNotFoundException.class)
