@@ -13,12 +13,12 @@ import org.springframework.web.util.UriComponentsBuilder;
 import pl.kopytka.common.domain.CustomerId;
 import pl.kopytka.common.domain.Money;
 import pl.kopytka.common.domain.OrderId;
-import pl.kopytka.customer.Customer;
-import pl.kopytka.customer.CustomerRepository;
+import pl.kopytka.common.event.CustomerChangedEvent;
 import pl.kopytka.order.command.OrderRepository;
 import pl.kopytka.order.domain.Order;
 import pl.kopytka.order.domain.OrderStatus;
 import pl.kopytka.order.domain.Quantity;
+import pl.kopytka.order.replication.CustomerViewService;
 import pl.kopytka.order.web.dto.CreateOrderRequest;
 
 import java.math.BigDecimal;
@@ -37,7 +37,7 @@ class OrderAcceptanceTest {
     private TestRestTemplate restTemplate;
 
     @Autowired
-    private CustomerRepository customerRepository;
+    private CustomerViewService customerViewService;
 
     @Autowired
     private OrderRepository orderRepository;
@@ -83,8 +83,12 @@ class OrderAcceptanceTest {
     }
 
     private CreateOrderRequest createOrderCommand() {
-        var customerId = customerRepository.save(new Customer("Waldek", "Kiepski", "waldek@gmail.com")).getCustomerId().id();
+        var customerId = UUID.randomUUID();
+        CustomerChangedEvent customerChangedEvent = new CustomerChangedEvent(
+                customerId,
+                "mairan@gmail.com");
 
+        customerViewService.replicateCustomerView(customerChangedEvent);
         var items = List.of(new CreateOrderRequest.OrderItemRequest(UUID.randomUUID(), 2, new BigDecimal("10.00"), new BigDecimal("20.00")),
                 new CreateOrderRequest.OrderItemRequest(UUID.randomUUID(), 1, new BigDecimal("34.56"), new BigDecimal("34.56")));
         var address = new CreateOrderRequest.OrderAddressRequest("Małysza", "94-000", "Adasiowo", "12");
