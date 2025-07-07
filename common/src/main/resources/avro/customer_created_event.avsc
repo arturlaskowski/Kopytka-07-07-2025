@@ -1,0 +1,29 @@
+{
+    "namespace": "pl.kopytka.avro.customer",
+    "type": "record",
+    "name": "CustomerEventAvroModel",
+    "fields": [
+        {
+            "name": "customerId",
+            "type": {
+                "type": "string",
+                "logicalType": "uuid"
+            }
+        },
+        {
+            "name": "eventType",
+            "type": {
+                  "type": "enum",
+                  "name": "CustomerEventType",
+                  "symbols": ["CREATED"]
+               }
+        },
+        {
+            "name": "createdAt",
+            "type": {
+                "type": "long",
+                "logicalType": "timestamp-millis"
+            }
+        }
+    ]
+}
