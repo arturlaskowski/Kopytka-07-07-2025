@@ -34,7 +34,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"customerId\": \"{{customerId}}\",\n    \"restaurantId\": \"{{restaurantId}}\",\n    \"deliveryAddress\": {\n        \"street\": \"Krakowska\",\n        \"postCode\": \"30-001\",\n        \"city\": \"Kraków\",\n        \"houseNo\": \"15/4\"\n    },\n    \"price\": 89.50,\n    \"basketItems\": [\n        {\n            \"productId\": \"{{productId1}}\",\n            \"price\": 25.50,\n            \"quantity\": 2,\n            \"totalPrice\": 51.00\n        },\n        {\n            \"productId\": \"{{productId2}}\",\n            \"price\": 38.50,\n            \"quantity\": 1,\n            \"totalPrice\": 38.50\n        }\n    ]\n}"
+					"raw": "{\n    \"customerId\": \"{{customerId}}\",\n    \"address\": {\n        \"street\": \"Krakowska\",\n        \"postCode\": \"30-001\",\n        \"city\": \"Kraków\",\n        \"houseNo\": \"15/4\"\n    },\n    \"price\": 89.50,\n    \"basketItems\": [\n        {\n            \"productId\": \"{{productId1}}\",\n            \"price\": 25.50,\n            \"quantity\": 2,\n            \"totalPrice\": 51.00\n        },\n        {\n            \"productId\": \"{{productId2}}\",\n            \"price\": 38.50,\n            \"quantity\": 1,\n            \"totalPrice\": 38.50\n        }\n    ]\n}"
 				},
 				"url": {
 					"raw": "{{order_service_url}}/api/orders",
