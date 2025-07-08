@@ -13,7 +13,7 @@ import java.time.Instant;
 
 @Component
 @RequiredArgsConstructor
-public class ProcessPaymentCommandPublisher implements MakePaymentCommandPublisher {
+public class PaymentCommandPublisher implements MakePaymentCommandPublisher {
 
     private final TopicsConfigData topicsConfigData;
     private final KafkaProducer<String, ProcessPaymentCommandAvroModel> kafkaProducer;
