@@ -3,7 +3,6 @@ package pl.kopytka.order.application;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import pl.kopytka.common.domain.valueobject.*;
 import pl.kopytka.order.application.dto.CreateOrderCommand;
@@ -14,8 +13,6 @@ import pl.kopytka.order.application.replicaiton.CustomerViewService;
 import pl.kopytka.order.domain.Order;
 import pl.kopytka.order.domain.OrderAddress;
 import pl.kopytka.order.domain.OrderItem;
-import pl.kopytka.order.domain.event.OrderPaymentEvent;
-import pl.kopytka.common.kafka.DomainEventPublisher;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -28,7 +25,7 @@ public class OrderApplicationService {
     private final OrderRepository orderRepository;
     private final OrderMapper orderMapper;
     private final CustomerViewService customerViewService;
-    private final DomainEventPublisher<OrderPaymentEvent> paymentEventPublisher;
+    private final MakePaymentCommandPublisher makePaymentCommandPublisher;
 
     @Transactional
     public OrderId createOrder(CreateOrderCommand command) {
@@ -73,12 +70,10 @@ public class OrderApplicationService {
     public void payOrder(OrderId orderId) {
         Order order = orderRepository.findById(orderId)
                 .orElseThrow(() -> new OrderNotFoundException(orderId));
-        
-        log.info("Sending payment command for order: {}", orderId.id());
 
+        log.info("Sending payment command for order: {}", orderId.id());
+        makePaymentCommandPublisher.publish(order.getId(), order.getCustomerId(), order.getPrice());
         order.pay();
-        OrderPaymentEvent paymentEvent = new OrderPaymentEvent(order);
-        paymentEventPublisher.publish(paymentEvent);
     }
 
     //TODO restaurant should be able to approve order

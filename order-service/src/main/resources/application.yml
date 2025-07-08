@@ -10,7 +10,7 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update
-    show-sql: true
+#    show-sql: true
     open-in-view: false
     properties:
       hibernate:
@@ -31,16 +31,6 @@ order-service:
     topics:
       customer-event: customer-events
       payment-command: payment-commands
-
-
-eureka:
-  instance:
-    preferIpAddress: true
-  client:
-    fetchRegistry: true
-    registerWithEureka: true
-    serviceUrl:
-      defaultZone: http://localhost:8070/eureka/
 
 kafka-config:
   bootstrap-servers: localhost:9092

@@ -113,11 +113,11 @@ class OrderAcceptanceTest extends KafkaIntegrationTest {
         OrderQuery order = getOrder(orderId);
         assertThat(order.status()).isEqualTo(OrderStatus.PAID);
 
-        // Verify that event was sent to Kafka
-        ConsumerRecord<String, String> customerEvent = records.poll(5, TimeUnit.SECONDS);
-        assertThat(customerEvent).isNotNull();
-        assertThat(customerEvent.topic()).isEqualTo(PAYMENT_COMMAND_TOPIC);
-        assertThat(customerEvent.key()).isEqualTo((orderId.toString()));
+        // Verify that command was sent to Kafka
+        ConsumerRecord<String, String> paymentCommand = records.poll(5, TimeUnit.SECONDS);
+        assertThat(paymentCommand).isNotNull();
+        assertThat(paymentCommand.topic()).isEqualTo(PAYMENT_COMMAND_TOPIC);
+        assertThat(paymentCommand.key()).isEqualTo((orderId.toString()));
     }
 
     @Test

@@ -9,7 +9,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-    show-sql: true
+ #   show-sql: true
     open-in-view: false
     properties:
       hibernate:
@@ -26,16 +26,6 @@ server:
 kopytka:
   scheduling:
     enabled: true  # Enable scheduling for payment reprocessing
-
-
-eureka:
-  instance:
-    preferIpAddress: true
-  client:
-    fetchRegistry: true
-    registerWithEureka: true
-    serviceUrl:
-      defaultZone: http://localhost:8070/eureka/
 
 
 payment-service:

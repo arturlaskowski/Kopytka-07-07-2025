@@ -10,6 +10,8 @@ CREATE USER customer_user WITH PASSWORD 'customer_password';
 CREATE USER order_user WITH PASSWORD 'order_password';
 CREATE USER payment_user WITH PASSWORD 'payment_password';
 CREATE USER restaurant_user WITH PASSWORD 'restaurant_password';
+CREATE USER admin_user WITH PASSWORD 'admin_password';
+ALTER USER admin_user WITH SUPERUSER;
 
 -- Grant privileges
 GRANT ALL PRIVILEGES ON SCHEMA customer_schema TO customer_user;
