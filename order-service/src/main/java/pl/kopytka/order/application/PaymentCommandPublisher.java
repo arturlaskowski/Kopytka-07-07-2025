@@ -4,7 +4,8 @@ import pl.kopytka.common.domain.valueobject.CustomerId;
 import pl.kopytka.common.domain.valueobject.Money;
 import pl.kopytka.common.domain.valueobject.OrderId;
 
-public interface MakePaymentCommandPublisher {
+public interface PaymentCommandPublisher {
 
-    void publish(OrderId orderId, CustomerId customerId, Money amount);
+    void publishSubtractPointsCommand(OrderId orderId, CustomerId customerId, Money amount);
+
 }

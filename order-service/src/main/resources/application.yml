@@ -10,7 +10,7 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update
-#    show-sql: true
+ #   show-sql: true
     open-in-view: false
     properties:
       hibernate:
@@ -31,6 +31,9 @@ order-service:
     topics:
       customer-event: customer-events
       payment-command: payment-commands
+      payment-event: payment-events
+      restaurant-order-command: restaurant-order-commands
+      restaurant-order-event: restaurant-order-events
 
 kafka-config:
   bootstrap-servers: localhost:9092

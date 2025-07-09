@@ -13,6 +13,10 @@ import pl.kopytka.order.application.replicaiton.CustomerViewService;
 import pl.kopytka.order.domain.Order;
 import pl.kopytka.order.domain.OrderAddress;
 import pl.kopytka.order.domain.OrderItem;
+import pl.kopytka.order.domain.event.OrderApprovedEvent;
+import pl.kopytka.order.domain.event.OrderCancelInitiatedEvent;
+import pl.kopytka.order.domain.event.OrderCanceledEvent;
+import pl.kopytka.order.domain.event.OrderPaidEvent;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -25,7 +29,8 @@ public class OrderApplicationService {
     private final OrderRepository orderRepository;
     private final OrderMapper orderMapper;
     private final CustomerViewService customerViewService;
-    private final MakePaymentCommandPublisher makePaymentCommandPublisher;
+    private final OrderEventPublisher orderEventPublisher;
+    private final PaymentCommandPublisher paymentCommandPublisher;
 
     @Transactional
     public OrderId createOrder(CreateOrderCommand command) {
@@ -56,14 +61,19 @@ public class OrderApplicationService {
 
         Order order = new Order(
                 customerId,
+                new RestaurantId(command.restaurantId()),
                 deliveryAddress,
                 new Money(command.price()),
                 basketItems
         );
+        var saveOrder = orderRepository.save(order);
 
-        Order savedOrder = orderRepository.save(order);
+        paymentCommandPublisher.publishSubtractPointsCommand(
+                saveOrder.getId(),
+                saveOrder.getCustomerId(),
+                saveOrder.getPrice());
 
-        return savedOrder.getId();
+        return saveOrder.getId();
     }
 
     @Transactional
@@ -71,18 +81,35 @@ public class OrderApplicationService {
         Order order = orderRepository.findById(orderId)
                 .orElseThrow(() -> new OrderNotFoundException(orderId));
 
-        log.info("Sending payment command for order: {}", orderId.id());
-        makePaymentCommandPublisher.publish(order.getId(), order.getCustomerId(), order.getPrice());
         order.pay();
+        orderEventPublisher.publish(new OrderPaidEvent(order));
     }
 
-    //TODO restaurant should be able to approve order
     @Transactional
     public void approveOrder(OrderId orderId) {
         Order order = orderRepository.findById(orderId)
                 .orElseThrow(() -> new OrderNotFoundException(orderId));
 
         order.approve();
+        orderEventPublisher.publish(new OrderApprovedEvent(order));
+    }
+
+    @Transactional
+    public void cancelOrder(OrderId orderId, String failureMessage) {
+        Order order = orderRepository.findById(orderId)
+                .orElseThrow(() -> new OrderNotFoundException(orderId));
+
+        order.cancel(failureMessage);
+        orderEventPublisher.publish(new OrderCanceledEvent(order));
+    }
+
+    @Transactional
+    public void initCancelOrder(OrderId orderId, String failureMessage) {
+        Order order = orderRepository.findById(orderId)
+                .orElseThrow(() -> new OrderNotFoundException(orderId));
+
+        order.initCancel(failureMessage);
+        orderEventPublisher.publish(new OrderCancelInitiatedEvent(order));
     }
 
     @Transactional(readOnly = true)

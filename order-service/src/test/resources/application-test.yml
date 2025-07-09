@@ -28,3 +28,8 @@ order-service:
     topics:
       customer-event: customer-events
       payment-command: payment-commands
+      payment-event: payment-events
+      payment-response: payment-responses
+      restaurant-approval-request: restaurant-approval-requests
+      restaurant-approval-response: restaurant-approval-responses
+      restaurant-event: restaurant-events

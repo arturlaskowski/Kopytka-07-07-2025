@@ -12,31 +12,30 @@ import org.apache.avro.message.BinaryMessageDecoder;
 import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
-public class ProcessPaymentCommandAvroModel extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -315328364544315279L;
+public class PaymentCancelledAvroEvent extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
+  private static final long serialVersionUID = 4408038710401946165L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"ProcessPaymentCommandAvroModel\",\"namespace\":\"pl.kopytka.avro.payment\",\"fields\":[{\"name\":\"orderId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"customerId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"price\",\"type\":{\"type\":\"bytes\",\"logicalType\":\"decimal\",\"precision\":10,\"scale\":2}},{\"name\":\"createdAt\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"}}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"PaymentCancelledAvroEvent\",\"namespace\":\"pl.kopytka.avro.payment\",\"fields\":[{\"name\":\"paymentId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"customerId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"orderId\",\"type\":{\"type\":\"string\",\"logicalType\":\"uuid\"}},{\"name\":\"createdAt\",\"type\":{\"type\":\"long\",\"logicalType\":\"timestamp-millis\"}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
   static {
     MODEL$.addLogicalTypeConversion(new org.apache.avro.Conversions.UUIDConversion());
     MODEL$.addLogicalTypeConversion(new org.apache.avro.data.TimeConversions.TimestampMillisConversion());
-    MODEL$.addLogicalTypeConversion(new org.apache.avro.Conversions.DecimalConversion());
   }
 
-  private static final BinaryMessageEncoder<ProcessPaymentCommandAvroModel> ENCODER =
+  private static final BinaryMessageEncoder<PaymentCancelledAvroEvent> ENCODER =
       new BinaryMessageEncoder<>(MODEL$, SCHEMA$);
 
-  private static final BinaryMessageDecoder<ProcessPaymentCommandAvroModel> DECODER =
+  private static final BinaryMessageDecoder<PaymentCancelledAvroEvent> DECODER =
       new BinaryMessageDecoder<>(MODEL$, SCHEMA$);
 
   /**
    * Return the BinaryMessageEncoder instance used by this class.
    * @return the message encoder used by this class
    */
-  public static BinaryMessageEncoder<ProcessPaymentCommandAvroModel> getEncoder() {
+  public static BinaryMessageEncoder<PaymentCancelledAvroEvent> getEncoder() {
     return ENCODER;
   }
 
@@ -44,7 +43,7 @@ public class ProcessPaymentCommandAvroModel extends org.apache.avro.specific.Spe
    * Return the BinaryMessageDecoder instance used by this class.
    * @return the message decoder used by this class
    */
-  public static BinaryMessageDecoder<ProcessPaymentCommandAvroModel> getDecoder() {
+  public static BinaryMessageDecoder<PaymentCancelledAvroEvent> getDecoder() {
     return DECODER;
   }
 
@@ -53,12 +52,12 @@ public class ProcessPaymentCommandAvroModel extends org.apache.avro.specific.Spe
    * @param resolver a {@link SchemaStore} used to find schemas by fingerprint
    * @return a BinaryMessageDecoder instance for this class backed by the given SchemaStore
    */
-  public static BinaryMessageDecoder<ProcessPaymentCommandAvroModel> createDecoder(SchemaStore resolver) {
+  public static BinaryMessageDecoder<PaymentCancelledAvroEvent> createDecoder(SchemaStore resolver) {
     return new BinaryMessageDecoder<>(MODEL$, SCHEMA$, resolver);
   }
 
   /**
-   * Serializes this ProcessPaymentCommandAvroModel to a ByteBuffer.
+   * Serializes this PaymentCancelledAvroEvent to a ByteBuffer.
    * @return a buffer holding the serialized data for this instance
    * @throws java.io.IOException if this instance could not be serialized
    */
@@ -67,19 +66,19 @@ public class ProcessPaymentCommandAvroModel extends org.apache.avro.specific.Spe
   }
 
   /**
-   * Deserializes a ProcessPaymentCommandAvroModel from a ByteBuffer.
+   * Deserializes a PaymentCancelledAvroEvent from a ByteBuffer.
    * @param b a byte buffer holding serialized data for an instance of this class
-   * @return a ProcessPaymentCommandAvroModel instance decoded from the given buffer
+   * @return a PaymentCancelledAvroEvent instance decoded from the given buffer
    * @throws java.io.IOException if the given bytes could not be deserialized into an instance of this class
    */
-  public static ProcessPaymentCommandAvroModel fromByteBuffer(
+  public static PaymentCancelledAvroEvent fromByteBuffer(
       java.nio.ByteBuffer b) throws java.io.IOException {
     return DECODER.decode(b);
   }
 
-  private java.util.UUID orderId;
+  private java.util.UUID paymentId;
   private java.util.UUID customerId;
-  private java.math.BigDecimal price;
+  private java.util.UUID orderId;
   private java.time.Instant createdAt;
 
   /**
@@ -87,19 +86,19 @@ public class ProcessPaymentCommandAvroModel extends org.apache.avro.specific.Spe
    * to their default values from the schema.  If that is desired then
    * one should use <code>newBuilder()</code>.
    */
-  public ProcessPaymentCommandAvroModel() {}
+  public PaymentCancelledAvroEvent() {}
 
   /**
    * All-args constructor.
-   * @param orderId The new value for orderId
+   * @param paymentId The new value for paymentId
    * @param customerId The new value for customerId
-   * @param price The new value for price
+   * @param orderId The new value for orderId
    * @param createdAt The new value for createdAt
    */
-  public ProcessPaymentCommandAvroModel(java.util.UUID orderId, java.util.UUID customerId, java.math.BigDecimal price, java.time.Instant createdAt) {
-    this.orderId = orderId;
+  public PaymentCancelledAvroEvent(java.util.UUID paymentId, java.util.UUID customerId, java.util.UUID orderId, java.time.Instant createdAt) {
+    this.paymentId = paymentId;
     this.customerId = customerId;
-    this.price = price;
+    this.orderId = orderId;
     this.createdAt = createdAt.truncatedTo(java.time.temporal.ChronoUnit.MILLIS);
   }
 
@@ -113,9 +112,9 @@ public class ProcessPaymentCommandAvroModel extends org.apache.avro.specific.Spe
   @Override
   public java.lang.Object get(int field$) {
     switch (field$) {
-    case 0: return orderId;
+    case 0: return paymentId;
     case 1: return customerId;
-    case 2: return price;
+    case 2: return orderId;
     case 3: return createdAt;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
@@ -125,7 +124,7 @@ public class ProcessPaymentCommandAvroModel extends org.apache.avro.specific.Spe
       new org.apache.avro.Conversion<?>[] {
       new org.apache.avro.Conversions.UUIDConversion(),
       new org.apache.avro.Conversions.UUIDConversion(),
-      new org.apache.avro.Conversions.DecimalConversion(),
+      new org.apache.avro.Conversions.UUIDConversion(),
       new org.apache.avro.data.TimeConversions.TimestampMillisConversion(),
       null
   };
@@ -140,29 +139,29 @@ public class ProcessPaymentCommandAvroModel extends org.apache.avro.specific.Spe
   @SuppressWarnings(value="unchecked")
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
-    case 0: orderId = (java.util.UUID)value$; break;
+    case 0: paymentId = (java.util.UUID)value$; break;
     case 1: customerId = (java.util.UUID)value$; break;
-    case 2: price = (java.math.BigDecimal)value$; break;
+    case 2: orderId = (java.util.UUID)value$; break;
     case 3: createdAt = (java.time.Instant)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
 
   /**
-   * Gets the value of the 'orderId' field.
-   * @return The value of the 'orderId' field.
+   * Gets the value of the 'paymentId' field.
+   * @return The value of the 'paymentId' field.
    */
-  public java.util.UUID getOrderId() {
-    return orderId;
+  public java.util.UUID getPaymentId() {
+    return paymentId;
   }
 
 
   /**
-   * Sets the value of the 'orderId' field.
+   * Sets the value of the 'paymentId' field.
    * @param value the value to set.
    */
-  public void setOrderId(java.util.UUID value) {
-    this.orderId = value;
+  public void setPaymentId(java.util.UUID value) {
+    this.paymentId = value;
   }
 
   /**
@@ -183,20 +182,20 @@ public class ProcessPaymentCommandAvroModel extends org.apache.avro.specific.Spe
   }
 
   /**
-   * Gets the value of the 'price' field.
-   * @return The value of the 'price' field.
+   * Gets the value of the 'orderId' field.
+   * @return The value of the 'orderId' field.
    */
-  public java.math.BigDecimal getPrice() {
-    return price;
+  public java.util.UUID getOrderId() {
+    return orderId;
   }
 
 
   /**
-   * Sets the value of the 'price' field.
+   * Sets the value of the 'orderId' field.
    * @param value the value to set.
    */
-  public void setPrice(java.math.BigDecimal value) {
-    this.price = value;
+  public void setOrderId(java.util.UUID value) {
+    this.orderId = value;
   }
 
   /**
@@ -217,49 +216,49 @@ public class ProcessPaymentCommandAvroModel extends org.apache.avro.specific.Spe
   }
 
   /**
-   * Creates a new ProcessPaymentCommandAvroModel RecordBuilder.
-   * @return A new ProcessPaymentCommandAvroModel RecordBuilder
+   * Creates a new PaymentCancelledAvroEvent RecordBuilder.
+   * @return A new PaymentCancelledAvroEvent RecordBuilder
    */
-  public static pl.kopytka.avro.payment.ProcessPaymentCommandAvroModel.Builder newBuilder() {
-    return new pl.kopytka.avro.payment.ProcessPaymentCommandAvroModel.Builder();
+  public static pl.kopytka.avro.payment.PaymentCancelledAvroEvent.Builder newBuilder() {
+    return new pl.kopytka.avro.payment.PaymentCancelledAvroEvent.Builder();
   }
 
   /**
-   * Creates a new ProcessPaymentCommandAvroModel RecordBuilder by copying an existing Builder.
+   * Creates a new PaymentCancelledAvroEvent RecordBuilder by copying an existing Builder.
    * @param other The existing builder to copy.
-   * @return A new ProcessPaymentCommandAvroModel RecordBuilder
+   * @return A new PaymentCancelledAvroEvent RecordBuilder
    */
-  public static pl.kopytka.avro.payment.ProcessPaymentCommandAvroModel.Builder newBuilder(pl.kopytka.avro.payment.ProcessPaymentCommandAvroModel.Builder other) {
+  public static pl.kopytka.avro.payment.PaymentCancelledAvroEvent.Builder newBuilder(pl.kopytka.avro.payment.PaymentCancelledAvroEvent.Builder other) {
     if (other == null) {
-      return new pl.kopytka.avro.payment.ProcessPaymentCommandAvroModel.Builder();
+      return new pl.kopytka.avro.payment.PaymentCancelledAvroEvent.Builder();
     } else {
-      return new pl.kopytka.avro.payment.ProcessPaymentCommandAvroModel.Builder(other);
+      return new pl.kopytka.avro.payment.PaymentCancelledAvroEvent.Builder(other);
     }
   }
 
   /**
-   * Creates a new ProcessPaymentCommandAvroModel RecordBuilder by copying an existing ProcessPaymentCommandAvroModel instance.
+   * Creates a new PaymentCancelledAvroEvent RecordBuilder by copying an existing PaymentCancelledAvroEvent instance.
    * @param other The existing instance to copy.
-   * @return A new ProcessPaymentCommandAvroModel RecordBuilder
+   * @return A new PaymentCancelledAvroEvent RecordBuilder
    */
-  public static pl.kopytka.avro.payment.ProcessPaymentCommandAvroModel.Builder newBuilder(pl.kopytka.avro.payment.ProcessPaymentCommandAvroModel other) {
+  public static pl.kopytka.avro.payment.PaymentCancelledAvroEvent.Builder newBuilder(pl.kopytka.avro.payment.PaymentCancelledAvroEvent other) {
     if (other == null) {
-      return new pl.kopytka.avro.payment.ProcessPaymentCommandAvroModel.Builder();
+      return new pl.kopytka.avro.payment.PaymentCancelledAvroEvent.Builder();
     } else {
-      return new pl.kopytka.avro.payment.ProcessPaymentCommandAvroModel.Builder(other);
+      return new pl.kopytka.avro.payment.PaymentCancelledAvroEvent.Builder(other);
     }
   }
 
   /**
-   * RecordBuilder for ProcessPaymentCommandAvroModel instances.
+   * RecordBuilder for PaymentCancelledAvroEvent instances.
    */
   @org.apache.avro.specific.AvroGenerated
-  public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<ProcessPaymentCommandAvroModel>
-    implements org.apache.avro.data.RecordBuilder<ProcessPaymentCommandAvroModel> {
+  public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<PaymentCancelledAvroEvent>
+    implements org.apache.avro.data.RecordBuilder<PaymentCancelledAvroEvent> {
 
-    private java.util.UUID orderId;
+    private java.util.UUID paymentId;
     private java.util.UUID customerId;
-    private java.math.BigDecimal price;
+    private java.util.UUID orderId;
     private java.time.Instant createdAt;
 
     /** Creates a new Builder */
@@ -271,18 +270,18 @@ public class ProcessPaymentCommandAvroModel extends org.apache.avro.specific.Spe
      * Creates a Builder by copying an existing Builder.
      * @param other The existing Builder to copy.
      */
-    private Builder(pl.kopytka.avro.payment.ProcessPaymentCommandAvroModel.Builder other) {
+    private Builder(pl.kopytka.avro.payment.PaymentCancelledAvroEvent.Builder other) {
       super(other);
-      if (isValidValue(fields()[0], other.orderId)) {
-        this.orderId = data().deepCopy(fields()[0].schema(), other.orderId);
+      if (isValidValue(fields()[0], other.paymentId)) {
+        this.paymentId = data().deepCopy(fields()[0].schema(), other.paymentId);
         fieldSetFlags()[0] = other.fieldSetFlags()[0];
       }
       if (isValidValue(fields()[1], other.customerId)) {
         this.customerId = data().deepCopy(fields()[1].schema(), other.customerId);
         fieldSetFlags()[1] = other.fieldSetFlags()[1];
       }
-      if (isValidValue(fields()[2], other.price)) {
-        this.price = data().deepCopy(fields()[2].schema(), other.price);
+      if (isValidValue(fields()[2], other.orderId)) {
+        this.orderId = data().deepCopy(fields()[2].schema(), other.orderId);
         fieldSetFlags()[2] = other.fieldSetFlags()[2];
       }
       if (isValidValue(fields()[3], other.createdAt)) {
@@ -292,21 +291,21 @@ public class ProcessPaymentCommandAvroModel extends org.apache.avro.specific.Spe
     }
 
     /**
-     * Creates a Builder by copying an existing ProcessPaymentCommandAvroModel instance
+     * Creates a Builder by copying an existing PaymentCancelledAvroEvent instance
      * @param other The existing instance to copy.
      */
-    private Builder(pl.kopytka.avro.payment.ProcessPaymentCommandAvroModel other) {
+    private Builder(pl.kopytka.avro.payment.PaymentCancelledAvroEvent other) {
       super(SCHEMA$, MODEL$);
-      if (isValidValue(fields()[0], other.orderId)) {
-        this.orderId = data().deepCopy(fields()[0].schema(), other.orderId);
+      if (isValidValue(fields()[0], other.paymentId)) {
+        this.paymentId = data().deepCopy(fields()[0].schema(), other.paymentId);
         fieldSetFlags()[0] = true;
       }
       if (isValidValue(fields()[1], other.customerId)) {
         this.customerId = data().deepCopy(fields()[1].schema(), other.customerId);
         fieldSetFlags()[1] = true;
       }
-      if (isValidValue(fields()[2], other.price)) {
-        this.price = data().deepCopy(fields()[2].schema(), other.price);
+      if (isValidValue(fields()[2], other.orderId)) {
+        this.orderId = data().deepCopy(fields()[2].schema(), other.orderId);
         fieldSetFlags()[2] = true;
       }
       if (isValidValue(fields()[3], other.createdAt)) {
@@ -316,41 +315,41 @@ public class ProcessPaymentCommandAvroModel extends org.apache.avro.specific.Spe
     }
 
     /**
-      * Gets the value of the 'orderId' field.
+      * Gets the value of the 'paymentId' field.
       * @return The value.
       */
-    public java.util.UUID getOrderId() {
-      return orderId;
+    public java.util.UUID getPaymentId() {
+      return paymentId;
     }
 
 
     /**
-      * Sets the value of the 'orderId' field.
-      * @param value The value of 'orderId'.
+      * Sets the value of the 'paymentId' field.
+      * @param value The value of 'paymentId'.
       * @return This builder.
       */
-    public pl.kopytka.avro.payment.ProcessPaymentCommandAvroModel.Builder setOrderId(java.util.UUID value) {
+    public pl.kopytka.avro.payment.PaymentCancelledAvroEvent.Builder setPaymentId(java.util.UUID value) {
       validate(fields()[0], value);
-      this.orderId = value;
+      this.paymentId = value;
       fieldSetFlags()[0] = true;
       return this;
     }
 
     /**
-      * Checks whether the 'orderId' field has been set.
-      * @return True if the 'orderId' field has been set, false otherwise.
+      * Checks whether the 'paymentId' field has been set.
+      * @return True if the 'paymentId' field has been set, false otherwise.
       */
-    public boolean hasOrderId() {
+    public boolean hasPaymentId() {
       return fieldSetFlags()[0];
     }
 
 
     /**
-      * Clears the value of the 'orderId' field.
+      * Clears the value of the 'paymentId' field.
       * @return This builder.
       */
-    public pl.kopytka.avro.payment.ProcessPaymentCommandAvroModel.Builder clearOrderId() {
-      orderId = null;
+    public pl.kopytka.avro.payment.PaymentCancelledAvroEvent.Builder clearPaymentId() {
+      paymentId = null;
       fieldSetFlags()[0] = false;
       return this;
     }
@@ -369,7 +368,7 @@ public class ProcessPaymentCommandAvroModel extends org.apache.avro.specific.Spe
       * @param value The value of 'customerId'.
       * @return This builder.
       */
-    public pl.kopytka.avro.payment.ProcessPaymentCommandAvroModel.Builder setCustomerId(java.util.UUID value) {
+    public pl.kopytka.avro.payment.PaymentCancelledAvroEvent.Builder setCustomerId(java.util.UUID value) {
       validate(fields()[1], value);
       this.customerId = value;
       fieldSetFlags()[1] = true;
@@ -389,48 +388,48 @@ public class ProcessPaymentCommandAvroModel extends org.apache.avro.specific.Spe
       * Clears the value of the 'customerId' field.
       * @return This builder.
       */
-    public pl.kopytka.avro.payment.ProcessPaymentCommandAvroModel.Builder clearCustomerId() {
+    public pl.kopytka.avro.payment.PaymentCancelledAvroEvent.Builder clearCustomerId() {
       customerId = null;
       fieldSetFlags()[1] = false;
       return this;
     }
 
     /**
-      * Gets the value of the 'price' field.
+      * Gets the value of the 'orderId' field.
       * @return The value.
       */
-    public java.math.BigDecimal getPrice() {
-      return price;
+    public java.util.UUID getOrderId() {
+      return orderId;
     }
 
 
     /**
-      * Sets the value of the 'price' field.
-      * @param value The value of 'price'.
+      * Sets the value of the 'orderId' field.
+      * @param value The value of 'orderId'.
       * @return This builder.
       */
-    public pl.kopytka.avro.payment.ProcessPaymentCommandAvroModel.Builder setPrice(java.math.BigDecimal value) {
+    public pl.kopytka.avro.payment.PaymentCancelledAvroEvent.Builder setOrderId(java.util.UUID value) {
       validate(fields()[2], value);
-      this.price = value;
+      this.orderId = value;
       fieldSetFlags()[2] = true;
       return this;
     }
 
     /**
-      * Checks whether the 'price' field has been set.
-      * @return True if the 'price' field has been set, false otherwise.
+      * Checks whether the 'orderId' field has been set.
+      * @return True if the 'orderId' field has been set, false otherwise.
       */
-    public boolean hasPrice() {
+    public boolean hasOrderId() {
       return fieldSetFlags()[2];
     }
 
 
     /**
-      * Clears the value of the 'price' field.
+      * Clears the value of the 'orderId' field.
       * @return This builder.
       */
-    public pl.kopytka.avro.payment.ProcessPaymentCommandAvroModel.Builder clearPrice() {
-      price = null;
+    public pl.kopytka.avro.payment.PaymentCancelledAvroEvent.Builder clearOrderId() {
+      orderId = null;
       fieldSetFlags()[2] = false;
       return this;
     }
@@ -449,7 +448,7 @@ public class ProcessPaymentCommandAvroModel extends org.apache.avro.specific.Spe
       * @param value The value of 'createdAt'.
       * @return This builder.
       */
-    public pl.kopytka.avro.payment.ProcessPaymentCommandAvroModel.Builder setCreatedAt(java.time.Instant value) {
+    public pl.kopytka.avro.payment.PaymentCancelledAvroEvent.Builder setCreatedAt(java.time.Instant value) {
       validate(fields()[3], value);
       this.createdAt = value.truncatedTo(java.time.temporal.ChronoUnit.MILLIS);
       fieldSetFlags()[3] = true;
@@ -469,19 +468,19 @@ public class ProcessPaymentCommandAvroModel extends org.apache.avro.specific.Spe
       * Clears the value of the 'createdAt' field.
       * @return This builder.
       */
-    public pl.kopytka.avro.payment.ProcessPaymentCommandAvroModel.Builder clearCreatedAt() {
+    public pl.kopytka.avro.payment.PaymentCancelledAvroEvent.Builder clearCreatedAt() {
       fieldSetFlags()[3] = false;
       return this;
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public ProcessPaymentCommandAvroModel build() {
+    public PaymentCancelledAvroEvent build() {
       try {
-        ProcessPaymentCommandAvroModel record = new ProcessPaymentCommandAvroModel();
-        record.orderId = fieldSetFlags()[0] ? this.orderId : (java.util.UUID) defaultValue(fields()[0]);
+        PaymentCancelledAvroEvent record = new PaymentCancelledAvroEvent();
+        record.paymentId = fieldSetFlags()[0] ? this.paymentId : (java.util.UUID) defaultValue(fields()[0]);
         record.customerId = fieldSetFlags()[1] ? this.customerId : (java.util.UUID) defaultValue(fields()[1]);
-        record.price = fieldSetFlags()[2] ? this.price : (java.math.BigDecimal) defaultValue(fields()[2]);
+        record.orderId = fieldSetFlags()[2] ? this.orderId : (java.util.UUID) defaultValue(fields()[2]);
         record.createdAt = fieldSetFlags()[3] ? this.createdAt : (java.time.Instant) defaultValue(fields()[3]);
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
@@ -493,8 +492,8 @@ public class ProcessPaymentCommandAvroModel extends org.apache.avro.specific.Spe
   }
 
   @SuppressWarnings("unchecked")
-  private static final org.apache.avro.io.DatumWriter<ProcessPaymentCommandAvroModel>
-    WRITER$ = (org.apache.avro.io.DatumWriter<ProcessPaymentCommandAvroModel>)MODEL$.createDatumWriter(SCHEMA$);
+  private static final org.apache.avro.io.DatumWriter<PaymentCancelledAvroEvent>
+    WRITER$ = (org.apache.avro.io.DatumWriter<PaymentCancelledAvroEvent>)MODEL$.createDatumWriter(SCHEMA$);
 
   @Override public void writeExternal(java.io.ObjectOutput out)
     throws java.io.IOException {
@@ -502,8 +501,8 @@ public class ProcessPaymentCommandAvroModel extends org.apache.avro.specific.Spe
   }
 
   @SuppressWarnings("unchecked")
-  private static final org.apache.avro.io.DatumReader<ProcessPaymentCommandAvroModel>
-    READER$ = (org.apache.avro.io.DatumReader<ProcessPaymentCommandAvroModel>)MODEL$.createDatumReader(SCHEMA$);
+  private static final org.apache.avro.io.DatumReader<PaymentCancelledAvroEvent>
+    READER$ = (org.apache.avro.io.DatumReader<PaymentCancelledAvroEvent>)MODEL$.createDatumReader(SCHEMA$);
 
   @Override public void readExternal(java.io.ObjectInput in)
     throws java.io.IOException {

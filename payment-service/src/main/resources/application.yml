@@ -27,13 +27,13 @@ kopytka:
   scheduling:
     enabled: true  # Enable scheduling for payment reprocessing
 
-
 payment-service:
   kafka:
     group-id: payment-topic-consumer
     topics:
       customer-event: customer-events
       payment-command: payment-commands
+      payment-event: payment-events
 
 kafka-config:
   bootstrap-servers: localhost:9092

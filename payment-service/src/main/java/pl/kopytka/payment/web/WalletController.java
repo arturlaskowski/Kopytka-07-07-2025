@@ -23,19 +23,6 @@ public class WalletController {
 
     private final WalletService walletService;
 
-    @PostMapping
-    public ResponseEntity<WalletDto> createWallet(@Valid @RequestBody CreateWalletRequest request) {
-        CustomerId customerId = new CustomerId(request.customerId());
-        Money initialAmount = new Money(request.initialBalance());
-        var walletId = walletService.createWallet(customerId, initialAmount);
-
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(walletId.id())
-                .toUri();
-
-        return ResponseEntity.created(location).build();
-    }
 
     @PostMapping("/{walletId}/funds")
     public ResponseEntity<Void> addFunds(

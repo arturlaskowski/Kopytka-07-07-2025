@@ -10,7 +10,6 @@ import pl.kopytka.order.application.replicaiton.CustomerViewService;
 
 import java.util.List;
 
-
 @Component
 @RequiredArgsConstructor
 class CreatedCustomerEventListener extends AbstractKafkaConsumer<CustomerEventAvroModel> {
